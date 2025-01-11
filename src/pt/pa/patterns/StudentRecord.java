@@ -11,14 +11,20 @@ public class StudentRecord {
 
     private String studentId;
     private String studentName;
+    Strategy strategy;
 
     private Map<Course, Integer> record;
 
-    public StudentRecord(String studentId, String studentName) {
+    public StudentRecord(String studentId, String studentName, Strategy strategy) {
+        this.strategy = strategy;
         this.studentId = studentId;
         this.studentName = studentName;
 
         this.record = new HashMap<>();
+    }
+
+    public void setStrategy(Strategy strategy) {
+        this.strategy = strategy;
     }
 
     public String getStudentId() {
@@ -30,11 +36,7 @@ public class StudentRecord {
     }
 
     public double computeAverage() {
-        double sum = 0;
-        for (Integer grade : record.values()) {
-            sum += grade;
-        }
-        return sum / record.size();
+        return strategy.calculateAverage(record);
     }
 
     @Override

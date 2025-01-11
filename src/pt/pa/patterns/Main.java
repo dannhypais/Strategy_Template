@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        StudentRecord record = new StudentRecord("2018", "João Meireles");
+        StudentRecord record = new StudentRecord("2018", "João Meireles", new StrategyArithmetic());
         try {
             record.importFromFile("record.csv");
         } catch (FileNotFoundException e) {
@@ -18,6 +18,10 @@ public class Main {
 
         /* Compute average */
         double average = record.computeAverage();
+        System.out.println(String.format("Course average: %.2f", average));
+        //change Strategy
+        record.setStrategy(new StrategyWeighted());
+        average = record.computeAverage();
         System.out.println(String.format("Course average: %.2f", average));
     }
 }
